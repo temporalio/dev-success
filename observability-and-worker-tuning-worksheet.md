@@ -2,61 +2,64 @@
 
 This worksheet is to guide worker tuning and observability sessions.
 
+Note that we highly recommended watching this [in-depth Temporal Worker Q&A](https://www.youtube.com/watch?v=pwr-Ss6WEco&list=PLytZkHFJwKUcMbOKCQmiVnoGUQTJOAndQ).
 
 ## Understand the current place in the Temporal journey
 
 - Are you just starting out with Temporal?
   - Do you have a Namespace?
 - Are you already running in production?
-  - If so, you have cloud metrics?
+  - If so, do you have cloud metrics?
   - If so, do you have worker/SDK metrics?
-
 
 ## Understand Use Case
 
-What is the scale, required performance, and required throughput?
+### Scale, performance, and throughput requirements
 
-Some example distinguishers:
+What are the scale, required performance, and required throughput?
+Is there a ton of throughput that needs quick responses and low latency?
+Contrast this with use cases that are background processing tasks that don't have latency requirements.
 
-- Is there a ton of throughput that needs quick responses and low latency?
-  Compared with use cases that are background processing tasks that don't have latency requirements.
+### Rate limiting activities
 
-
-- are you rate limiting activities? (this more-or-less translates to "are you rate limiting downstream services?")
-  - for example, if they're talking to a banking API that's rate limited, which means their activities will have large schedule-to-start latencies. don't alert on this
-  - if they aren't rate limiting on that, then schedule-to-start would be a good thing to alert on
+Are you rate limiting activities?
+This oftentimes translates to "are you rate limiting downstream services?"
+For example, if your application calls a banking API that's rate limited, then your activities will need to be rate limited, so they will have large schedule-to-start latencies.
+In this case, you wouldn't want to alert on schedule-to-start latencies.
+Contrast that with if you aren't rate limited on activities or downstream services -- in this case, then schedule-to-start would be a good thing to alert on.
 
 ## Understand Tech Stack
 
-- What SDK?
-  - Be sure to look through samples repos (in temporalio GitHub, there are repos for each SDK such as *samples-python*)
+What SDK are you using?
+Be sure to look through its samples repos (in [temporalio GitHub](https://github.com/orgs/temporalio/repositories), there are repos for each SDK such as [samples-python](https://github.com/temporalio/samples-python)).
 
 ## General Guidelines
 
-- thy need checks in place to not kill their workers --
-  - this is going over their resources... two of them: CPU and memory
-  - the most important metric that the customers should always observe is resource utilization on their SDK workers
-    - they need this before they can make any sense of the temporal metrics
+### Monitor worker CPU and memory usage
 
-- what do the server metrics represent? a view on the namespace level
-  - they can't translate that into an overall state of their application
-  - they may have more than one application on that namespace
-  - understand that the cloud metrics are per namespace, and they don't have the ability to look more granularly
-  - if we need something more specific, then we have to look at their worker metrics
-  - it's easier for customers to set up cloud metrics, but it's harder for them to set up worker metrics.
-- worker metrics
-  - very useful to get a more fine-grained view into their situation.
+You should always have a way to monitor your worker memory and CPU usage.
+This is often a prerequisite to understanding any other metrics.
 
-- there are two sides to the worker metrics
-  - worker metrics + client metrics
-    - client:
-      - signal, query, etc... clients that start the execution vs the clients that actually are running the code (i.e. workers)
-      - such as failures to starting and signalling workflows
+### Server metrics are at the namespace level
 
-## Unsorted
+Server metrics operate at the namespace level -- they don't get more granular than that.
+If you have more than one application running in your namespace, and you need fine-grained visibility into them individually, you can only do that with worker/SDK metrics.
 
+### Worker metrics and client metrics
+
+There are two sides to the SDK metrics: worker metrics and client metrics.
+
+- client:
+  - signal, query, etc... clients that start the execution vs the clients that actually are running the code (i.e. workers)
+  - such as failures to starting and signalling workflows
+
+### Yet-to-be-sorted
 
   - rate limiting -- customer has to understand that we're multitenant on cloud... there are limits. RPS, APS, etc. We need to make sure they know how to detect if they're getting close to this
+
+## Yet-to-be-sorted
+
+
   - cloud metrics -- customers ask how to set it up, then you send them the link, then they ask how often the numbers get updated, etc.
 
 
