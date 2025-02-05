@@ -75,8 +75,7 @@ Because of this, we recommend setting up some metrics to detect if you're close 
 #### Troubleshooting
 
 You will use metrics to help troubleshoot and find root causes of issues.
-
-Some of these might be
+Some of these might be:
 
 - workflows getting stuck (NDE, intermittent failures, etc)
 - unexpected scenarios such as an infinite loop accidentally gets deployed to production
