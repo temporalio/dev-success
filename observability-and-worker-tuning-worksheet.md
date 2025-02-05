@@ -1,0 +1,55 @@
+# Observability and Worker Tuning Worksheet
+
+This worksheet is to guide worker tuning and observability sessions.
+
+- understand the user's scale
+  - what are requirements in terms of performance and throughput
+- not about dumping information on them, but more like figuring out their use-case, and see what is relevant for them
+- how much throughput -- very high throughput?
+  - and need responses very quickly?
+    - the observability in this scenario is much different from the observability for a background processing use-case
+- questions to ask
+  - are you rate limiting activities? (this more-or-less translates to "are you rate limiting downstream services?")
+    - for example, if they're talking to a banking API that's rate limited, which means their activities will have large schedule-to-start latencies. don't alert on this
+    - if they aren't rate limiting on that, then schedule-to-start would be a good thing to alert on
+  - if they have background processes, they probably don't care about latency. So, figure out if they care about latency is a big thing
+  - thy need checks in place to not kill their workers --
+    - this is going over their resources... two of them: CPU and memory
+    - ==the most important metric that the customers should always observe is resource utilization on their SDK workers==
+      - they need this before they can make any sense of the temporal metrics
+  - rate limiting -- customer has to understand that we're multitenant on cloud... there are limits. RPS, APS, etc. We need to make sure they know how to detect if they're getting close to this
+  - cloud metrics -- customers ask how to set it up, then you send them the link, then they ask how often the numbers get updated, etc.
+- what do the server metrics represent? a view on the namespace level
+  - they can't translate that into an overall state of their application
+  - they may have more than one application on that namespace
+  - understand that the cloud metrics are per namespace, and they don't have the ability to look more granularly
+  - if we need something more specific, then we have to look at their worker metrics
+  - it's easier for customers to set up cloud metrics, but it's harder for them to set up worker metrics.
+- worker metrics
+  - very useful to get a more fine-grained view into their situation.
+- have an understanding of what SDK they're using
+  - if we know, then have the samples ready to send them links
+- there are two sides to the worker metrics
+  - worker metrics + client metrics
+    - client:
+      - signal, query, etc... clients that start the execution vs the clients that actually are running the code (i.e. workers)
+      - such as failures to starting and signalling workflows
+- we don't see their worker metrics
+  - because we don't have their metrics,
+  - we have a dashboards repo
+    - ==we should revive this== -- a lot of important things are missing from there
+- some observability meetings are very short, and some can be longer
+  - "i know you want to talk about observability, but can you tell me where you are in the journey" sometimes they don't even have a namespace yet. this is very different from if they're already running in production
+    - if they're already running in prod, they sometimes don't have cloud or worker metrics
+    - or the opposite side is that they are in prod and have all metrics set up already
+    - if they haven't set up their metrics yet, your focus probably won't be which metrics are important, but it should probably be more focused on the importance of metrics in general or how to get started setting them up
+  - let's say we have a customer who's about to run in production and they generally have their stuff set up. the difficulty becomes where to start. Temporal has a million metrics. The game is not just listing things for them. What helps is to talk about them by certain groupings
+    - troubleshooting -- finding issues and root causes
+      - workflows getting stuck (NDE, intermittent failures, etc)
+      - grouping: unexpected
+      - clients doing something dumb -- somebody writes an infinite loop etc
+        - unexpected high rates of signals, workflow executions, etc
+      - grouping of latency metrics
+        - subgroup of worker tuning
+      - having a mental grouping of all the metrics up front is very helpful.
+        - ask the customer... what's important to you? is it latency, is it this, is it that, etc?
