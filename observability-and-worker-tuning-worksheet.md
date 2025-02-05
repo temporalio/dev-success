@@ -47,26 +47,25 @@ If you have more than one application running in your namespace, and you need fi
 
 ### Worker metrics and client metrics
 
-There are two sides to the SDK metrics: worker metrics and client metrics.
+There are two sides to the [SDK metrics](https://docs.temporal.io/references/sdk-metrics): worker metrics and client metrics.
+This difference can be seen in the "Emitted by" column of the chart in the docs.
 
-- client:
-  - signal, query, etc... clients that start the execution vs the clients that actually are running the code (i.e. workers)
-  - such as failures to starting and signalling workflows
+The client has metrics around number of requests (both long and short), their latency, and the number of failures.
 
-### Yet-to-be-sorted
+The worker has more metrics. Some high-level groups are:
 
-  - rate limiting -- customer has to understand that we're multitenant on cloud... there are limits. RPS, APS, etc. We need to make sure they know how to detect if they're getting close to this
+- activity execution (latencies, errors, cancellations, failures, etc)
+- local activity execution (failed, cancelled, latencies, etc)
+- pollers (number of them, etc)
+- sticky cache (size, misses, hits, evictions)
+- workers (task slots available and used)
+- workflow execution (cancelled, completed, continued as new, failed, etc)
+- workflow task execution (failed, latency, task queue polling, latencies)
+- nexus (polling, task execution, etc)
 
 ## Yet-to-be-sorted
 
-
-  - cloud metrics -- customers ask how to set it up, then you send them the link, then they ask how often the numbers get updated, etc.
-
-
-- we don't see their worker metrics
-  - because we don't have their metrics,
-  - we have a dashboards repo
-    - ==we should revive this== -- a lot of important things are missing from there
+  - rate limiting -- customer has to understand that we're multitenant on cloud... there are limits. RPS, APS, etc. We need to make sure they know how to detect if they're getting close to this
 - let's say we have a customer who's about to run in production and they generally have their stuff set up. the difficulty becomes where to start. Temporal has a million metrics. The game is not just listing things for them. What helps is to talk about them by certain groupings
 - troubleshooting -- finding issues and root causes
   - workflows getting stuck (NDE, intermittent failures, etc)
@@ -77,3 +76,7 @@ There are two sides to the SDK metrics: worker metrics and client metrics.
   - subgroup of worker tuning
   - having a mental grouping of all the metrics up front is very helpful.
   - ask the customer... what's important to you? is it latency, is it this, is it that, etc?
+- we don't see their worker metrics
+  - because we don't have their metrics,
+  - we have a dashboards repo
+    - ==we should revive this== -- a lot of important things are missing from there
