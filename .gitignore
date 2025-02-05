@@ -1,0 +1,12 @@
+
+# ds store
+.DS_Store
+
+# pycache
+__pycache__/
+
+# virtualenv
+.venv/
+
+# scratch folder
+scratch/
