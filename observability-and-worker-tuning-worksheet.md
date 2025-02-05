@@ -63,20 +63,26 @@ The worker has more metrics. Some high-level groups are:
 - workflow task execution (failed, latency, task queue polling, latencies)
 - nexus (polling, task execution, etc)
 
-## Yet-to-be-sorted
+### Rate limiting
 
-  - rate limiting -- customer has to understand that we're multitenant on cloud... there are limits. RPS, APS, etc. We need to make sure they know how to detect if they're getting close to this
-- let's say we have a customer who's about to run in production and they generally have their stuff set up. the difficulty becomes where to start. Temporal has a million metrics. The game is not just listing things for them. What helps is to talk about them by certain groupings
-- troubleshooting -- finding issues and root causes
-  - workflows getting stuck (NDE, intermittent failures, etc)
-  - grouping: unexpected
-  - clients doing something dumb -- somebody writes an infinite loop etc
-  - unexpected high rates of signals, workflow executions, etc
-  - grouping of latency metrics
-  - subgroup of worker tuning
-  - having a mental grouping of all the metrics up front is very helpful.
-  - ask the customer... what's important to you? is it latency, is it this, is it that, etc?
-- we don't see their worker metrics
-  - because we don't have their metrics,
-  - we have a dashboards repo
-    - ==we should revive this== -- a lot of important things are missing from there
+Temporal Cloud is multitenant, so there are rate limits, such as actions per second (APS).
+See the [documentation on Temporal Cloud's namespace level limits](https://docs.temporal.io/cloud/limits#namespace-level).
+
+Because of this, we recommend setting up some metrics to detect if you're close to this limit.
+
+### Scenarios and use-cases
+
+#### Troubleshooting
+
+You will use metrics to help troubleshoot and find root causes of issues.
+
+Some of these might be
+
+- workflows getting stuck (NDE, intermittent failures, etc)
+- unexpected scenarios such as an infinite loop accidentally gets deployed to production
+- unexpected high rates of signals, workflow executions, etc
+- high latencies in specific areas, and you want to find what's causing it
+
+#### Worker tuning
+
+You may want a group of metrics to help guide you on further fine-tuning your worker fleet by scaling it up or down.
