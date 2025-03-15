@@ -5,7 +5,7 @@ This section provides a list of common issues and solutions for troubleshooting 
 [official documentation](https://docs.temporal.io/develop/python/) for the most up-to-date information.
 
 If you landed here by accident, please feel free to reach out through the [community channels](https://temporal.io/community) or open a 
-[Zendesk ticket](https://support.temporal.io/) if you are a Temporal Cloud customer.
+[support ticket](https://support.temporal.io/) if you are a Temporal Cloud customer.
 
 ## WorkflowTaskTimeout
 - [What is a Workflow Task Timeout?](https://docs.temporal.io/encyclopedia/detecting-workflow-failures#workflow-task-timeout)
