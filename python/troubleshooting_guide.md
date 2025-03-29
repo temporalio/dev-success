@@ -35,3 +35,13 @@ Blocking the thread can significantly delay execution, potentially leading to a 
 - if you are unsure if an activity makes blocking calls, convert the async activities into synchronous ones ([docs](https://docs.temporal.io/develop/python/python-sdk-sync-vs-async#when-should-you-use-async-activities)).
 - see the ["Registering Activities" page of the Python 101 course](https://temporal.talentlms.com/catalog/info/id:143) for guidance on sync and async activities.
 - see the [API docs for the worker initialization](https://python.temporal.io/temporalio.worker.Worker.html#__init__) to understand the configuration options.
+
+## Memory Leak
+
+If you are seeing a memory leak, then
+**make sure you are passing through your modules into the workflow sandbox**.
+
+1. Separate your activity code and your workflow code into different files.
+2. In the workflow file, pass through the third party modules and your
+   personal modules that you know don't
+   have side effects upon import.
