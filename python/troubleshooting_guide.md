@@ -43,5 +43,5 @@ If you are seeing a memory leak, then
 
 1. Separate your activity code and your workflow code into different files.
 2. In the workflow file, pass through the third party modules and your
-   personal modules (especially activity code) that don't
+   personal modules (including activity code) that don't
    have side effects upon import.
