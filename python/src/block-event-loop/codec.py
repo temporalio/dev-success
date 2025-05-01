@@ -30,7 +30,7 @@ class EncryptionCodec(PayloadCodec):
                 time.sleep(0.4)
 
         # Simulate blocking work
-        #asyncio.get_running_loop().run_in_executor(None, sleep)
+        #asyncio.get_running_loop().run_in_executor(None, sleep) #does not block asyncio
         sleep()
 
 
