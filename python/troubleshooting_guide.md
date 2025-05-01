@@ -36,6 +36,10 @@ Blocking the thread can significantly delay execution, potentially leading to a 
 - see the ["Registering Activities" page of the Python 101 course](https://temporal.talentlms.com/catalog/info/id:143) for guidance on sync and async activities.
 - see the [API docs for the worker initialization](https://python.temporal.io/temporalio.worker.Worker.html#__init__) to understand the configuration options.
 
+
+##### Code 
+- [This example](src/block-event-loop) demonstrate how blocking the thread causes the issue.
+
 ## Memory Leak
 
 If you are seeing a memory leak, then
