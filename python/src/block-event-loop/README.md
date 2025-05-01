@@ -47,6 +47,9 @@ uv run _starter.py
 
 The file [codec.py](codec.py) in the function `encode` blocks "randomly" the asyncio thread.   
 
+The blocking is done as part of the [codec](https://docs.temporal.io/payload-codec#payload-codec),
+which is used to encrypt/decrypt the payloads.
+
 ```
   def sleep():
      if random.random() < 0.1:
@@ -72,7 +75,7 @@ and grafana dashboard (**Workflow Task Execution Latency (p95)**)
 The task is dispatched to the worker, but it cannot be run while the event loop is blocked.
 
 
-To change the code to run with asyncio you can search for `# Simulate blocking work` and replace 
+To change the code to run with asyncio you can search for [# Simulate blocking work](./codec.py/#L28) and replace 
 ```
         #asyncio.get_running_loop().run_in_executor(None, sleep)
         sleep()
