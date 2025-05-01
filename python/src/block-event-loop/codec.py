@@ -1,6 +1,5 @@
 # source https://github.com/temporalio/samples-python/blob/main/encryption/codec.py
 
-import asyncio
 import os
 import random
 import time
@@ -18,9 +17,6 @@ class EncryptionCodec(PayloadCodec):
     def __init__(self, key_id: str = default_key_id, key: bytes = default_key) -> None:
         super().__init__()
         self.key_id = key_id
-        # We are using direct AESGCM to be compatible with samples from
-        # TypeScript and Go. Pure Python samples may prefer the higher-level,
-        # safer APIs.
         self.encryptor = AESGCM(key)
 
     async def encode(self, payloads: Iterable[Payload]) -> List[Payload]:
@@ -48,17 +44,14 @@ class EncryptionCodec(PayloadCodec):
     async def decode(self, payloads: Iterable[Payload]) -> List[Payload]:
         ret: List[Payload] = []
         for p in payloads:
-            # Ignore ones w/out our expected encoding
             if p.metadata.get("encoding", b"").decode() != "binary/encrypted":
                 ret.append(p)
                 continue
-            # Confirm our key ID is the same
             key_id = p.metadata.get("encryption-key-id", b"").decode()
             if key_id != self.key_id:
                 raise ValueError(
                     f"Unrecognized key ID {key_id}. Current key ID is {self.key_id}."
                 )
-            # Decrypt and append
             ret.append(Payload.FromString(self.decrypt(p.data)))
         return ret
 

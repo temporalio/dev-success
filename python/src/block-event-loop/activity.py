@@ -11,7 +11,7 @@ def compose_greeting(input_data: ComposeGreetingInput) -> str:
 
     for i in range(5):
         # Simulate some work
-       time.sleep(0.1)
+       time.sleep(0.1) # This blocks the event loop
 
     end_time = time.time()
 

@@ -30,12 +30,6 @@ def init_runtime_with_prometheus(port: int) -> Runtime:
 
 
 async def main():
-    # Uncomment the lines below to see logging output
-    # import logging
-
-    #    os.environ["RUST_LOG"] = "temporal_sdk_core=DEBUG"
-
-    #    logging.basicConfig(level=logging.DEBUG)
 
     runtime = init_runtime_with_prometheus(8086)
 
@@ -55,8 +49,6 @@ async def main():
             task_queue="hello-activity-task-queue",
             workflows=[GreetingWorkflow],
             activities=[compose_greeting],
-            # max_cached_workflows=4,
-            # max_concurrent_workflow_tasks=10,
             max_concurrent_workflow_task_polls=50,
             nonsticky_to_sticky_poll_ratio=0.5,
             max_concurrent_activity_task_polls=20,
