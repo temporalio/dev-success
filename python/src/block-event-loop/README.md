@@ -98,7 +98,7 @@ change was done at 14:23:
 - Workflow task latency decreased from 1 minute to 7 seconds (p95)
   - It’s still relatively high due to latency added by the codec, but it’s no longer blocking the worker in the same way.
 - Workflow schedule to start latency decreased from 1 minute to a few milliseconds (p95)
-- 
+
 
 ####  Changing the code to run purely with asyncio 
 
