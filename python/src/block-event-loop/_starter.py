@@ -1,14 +1,11 @@
 import asyncio
-import concurrent
 
 from temporalio.client import Client
 from temporalio.common import WorkflowIDReusePolicy
 from temporalio.converter import (
     DataConverter,
 )
-from temporalio.worker import Worker
 
-from activity import compose_greeting
 from codec import EncryptionCodec
 from converter import PydanticPayloadConverter
 from test_types import ComposeGreetingRequest

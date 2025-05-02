@@ -38,7 +38,7 @@ Blocking the thread can significantly delay execution, potentially leading to a 
 
 
 ##### Code 
-- [This example](src/block-event-loop) demonstrate how blocking the thread causes the issue.
+- [This example](src/block-event-loop) demonstrates how blocking the thread causes the issue.
 
 ## Memory Leak
 
