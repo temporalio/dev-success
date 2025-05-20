@@ -54,3 +54,5 @@
         The certificate filters should match the key/values on **Subject**  (the following is an example, it does not match the certificate filtered above).
 
         ![Untitled](images/certificate-filters-subject.png)
+
+      - Another option is to run `tcld namespace get --namespace <namespace> | jq '.spec.searchAttributes'`
