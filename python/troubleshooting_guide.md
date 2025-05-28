@@ -43,7 +43,7 @@ Blocking the thread can significantly delay execution, potentially leading to a 
 ## Memory Leak
 
 If you are seeing a memory leak, then
-**make sure you are passing through your modules into the workflow sandbox**.
+**make sure you are passing through your modules into the workflow sandbox** ([docs](https://docs.temporal.io/develop/python/python-sdk-sandbox#passthrough-modules)).
 
 1. Separate your activity code and your workflow code into different files.
 2. In the workflow file, pass through the third party modules and your
