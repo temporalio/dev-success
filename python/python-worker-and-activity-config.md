@@ -72,3 +72,7 @@ Chad from the SDK team wrote a great blog about the Python SDK.
 In particular, [this section](https://temporal.io/blog/durable-distributed-asyncio-event-loop#temporal-workflows-are-asyncio-event-loops)
 is very relevant and can help with a deeper understanding of
 how the SDK works.
+
+[Enable asyncio's debug mode](https://docs.python.org/3/library/asyncio-dev.html#debug-mode) to log out callbacks taking longer to 100 ms.
+
+There's a [PR and discusions within it](https://github.com/temporalio/samples-python/pull/173) on how the Temporal SDK would like to approach the `async`/`await` paradigm with Python.
