@@ -1,5 +1,8 @@
 # Troubleshooting Connection Issues to Temporal Cloud
 
+> Note: When troubleshooting connection issues, be sure that the diagnostic commands are run from the correct location.
+> For example, if a worker pod is having trouble connecting, then the commands must be run from that pod.
+
 1. Verify that you can reach the namespace on port 7233
 
    `nc -zvw10 ${namespace}.tmprl.cloud 7233`
