@@ -17,7 +17,7 @@
    If you can connect this way, but there are connectivity issues when running code, the problem could be in your code.
    We should suggest you test if you can connect by running one of our connectivity samples:
 
-   - [Java Sample](https://github.com/temporalio/samples-java/tree/main/src/main/java/io/temporal/samples/ssl)
+   - [Java Sample](https://github.com/temporalio/samples-java/tree/main/core/src/main/java/io/temporal/samples/ssl)
    - [TypeScript Sample](https://github.com/temporalio/samples-typescript/tree/main/hello-world-mtls/)
    - [Go Sample](https://github.com/temporalio/samples-go/tree/main/helloworldmtls)
    - [Python Sample](https://github.com/temporalio/samples-python/blob/main/hello/hello_mtls.py)
