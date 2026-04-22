@@ -14,9 +14,9 @@
 
    `GRPC_GO_LOG_SEVERITY_LEVEL=info GRPC_GO_LOG_VERBOSITY_LEVEL=99 temporal workflow list --address <namespace>.<accountId>.tmprl.cloud:7233 --namespace <namespace>.<accountId> --tls-cert-path ./client.pem --tls-key-path ./client.key`
 
-   - Appending the `GRPC_GO_LOG_SEVERITY_LEVEL` and `GRPC_GO_LOG_VERBOSITY_LEVEL` flags tells the Temporal CLI to trace its network calls, allowing for greater debugging visibility.
+   - Prepending the `GRPC_GO_LOG_SEVERITY_LEVEL` and `GRPC_GO_LOG_VERBOSITY_LEVEL` flags tells the Temporal CLI to trace its network calls, allowing for greater debugging visibility.
   
-   Or, to test a gRPC request directly, you can use `grpcurl` (appending the same `GRPC_GO_*` flags for network debugging):
+   Or, to test a gRPC request directly, you can use `grpcurl` (Prepending the same `GRPC_GO_*` flags for network debugging):
 
    `grpcurl -cert /path/to/client.pem -key /path/to/client.key <namespace>.<account>.tmprl.cloud:7233 temporal.api.workflowservice.v1.WorkflowService/GetSystemInfo`
 
