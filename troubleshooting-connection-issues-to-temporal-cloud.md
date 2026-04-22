@@ -18,7 +18,7 @@
   
    Or, to test a gRPC request directly, you can use `grpcurl` (appending the same above flags if network debugging required):
 
-   `GRPC_GO_LOG_SEVERITY_LEVEL=info GRPC_GO_LOG_VERBOSITY_LEVEL=99 grpcurl -cert /path/to/client.pem -key /path/to/client.key <namespace>.<account>.tmprl.cloud:7233 temporal.api.workflowservice.v1.WorkflowService/GetSystemInfo
+   `GRPC_GO_LOG_SEVERITY_LEVEL=info GRPC_GO_LOG_VERBOSITY_LEVEL=99 grpcurl -cert /path/to/client.pem -key /path/to/client.key <namespace>.<account>.tmprl.cloud:7233 temporal.api.workflowservice.v1.WorkflowService/GetSystemInfo`
 
    If you can connect this way, but there are connectivity issues when running code, the problem could be in your code.
    We should suggest you test if you can connect by running one of our connectivity samples:
