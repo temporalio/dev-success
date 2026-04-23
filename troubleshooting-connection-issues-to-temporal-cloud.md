@@ -16,7 +16,7 @@
 
    - Prepending the `GRPC_GO_LOG_SEVERITY_LEVEL` and `GRPC_GO_LOG_VERBOSITY_LEVEL` flags tells the Temporal CLI to trace its network calls, allowing for greater debugging visibility.
   
-   Or, to test a gRPC request directly, you can use `grpcurl` using either mTLS, or API key authentication (Prepending the same `GRPC_GO_*` flags for network debugging):
+   If the `temporal` CLI isn't available, you can use `grpcurl` using either mTLS, or API key authentication (Prepending the same `GRPC_GO_*` flags for network debugging):
 
    `grpcurl -cert /path/to/client.pem -key /path/to/client.key <namespace>.<accountId>.tmprl.cloud:7233 temporal.api.workflowservice.v1.WorkflowService/GetSystemInfo`
 
